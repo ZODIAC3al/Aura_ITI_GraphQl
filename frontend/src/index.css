@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-matcha: #090e0c;
+  --card-matcha: #121815;
+  --border-matcha: rgba(134, 239, 172, 0.15);
+  
+  --accent-cream: #f4efe2;
+  --accent-sage: #86efac;
+  --text-primary: #fbf9f4;
+  --text-muted: #819188;
+  
+  --card-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.6);
+  --input-focus-shadow: 0 0 0 4px rgba(134, 239, 172, 0.2);
+  
+  font-family: 'Quicksand', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-matcha);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* Layout Structure */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 30px 20px;
+  margin-left: 240px; /* Sidebar width on desktop */
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding-bottom: 90px; /* Leave space for bottom nav */
+  }
+}
+
+.feed-container {
+  width: 100%;
+  max-width: 470px; /* Instagram feed standard width */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar navigation - Desktop */
+.sidebar-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 240px;
+  background-color: var(--card-matcha);
+  border-right: 1px solid var(--border-matcha);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.sidebar-logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 48px;
+  background: linear-gradient(45deg, #a7f3d0, #f4efe2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  transition: all 0.25s ease;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(134, 239, 172, 0.08);
+  color: var(--accent-sage);
+}
+
+.sidebar-link.active {
+  font-weight: 700;
+  color: var(--accent-sage);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+}
+
+/* Bottom navigation - Mobile */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 64px;
+  background-color: var(--card-matcha);
+  border-top: 1px solid var(--border-matcha);
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 768px) {
+  .sidebar-nav {
+    display: none;
+  }
+  .bottom-nav {
+    display: flex;
+  }
+}
+
+.bottom-nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.bottom-nav-btn:hover {
+  color: var(--accent-sage);
+}
+
+/* Instagram Post Card */
+.instagram-card {
+  background-color: var(--card-matcha);
+  border: 1px solid var(--border-matcha);
+  border-radius: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+}
+
+.header-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #86efac, #f4efe2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0d1310;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.user-username {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.card-content-area {
+  padding: 0 14px 14px;
+}
+
+.post-title {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent-cream);
+}
+
+.post-body {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+}
+
+.card-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px;
+  border-top: 1px solid rgba(134, 239, 172, 0.08);
+}
+
+.action-icon-btn {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 1.35rem;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.15s ease;
+  display: flex;
+  align-items: center;
+}
+
+.action-icon-btn:hover {
+  transform: scale(1.15);
+  color: var(--accent-sage);
+}
+
+.action-icon-btn.liked {
+  color: #ff6884;
+}
+
+.caption-area {
+  padding: 0 14px 8px;
+  font-size: 0.95rem;
+}
+
+.caption-author {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.post-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  padding: 0 14px 14px;
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modal-content {
+  background-color: var(--card-matcha);
+  border: 1px solid var(--border-matcha);
+  border-radius: 20px;
+  width: 90%;
+  max-width: 470px;
+  padding: 28px;
+  box-shadow: var(--card-shadow);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  color: var(--text-primary);
+}
+
+/* Cute Buttons & Inputs */
+.cute-input {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-matcha);
+  background: rgba(9, 14, 12, 0.6);
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.cute-input:focus {
+  border-color: var(--accent-sage);
+  background: var(--bg-matcha);
+  box-shadow: var(--input-focus-shadow);
+}
+
+.cute-btn {
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cute-btn-primary {
+  background: linear-gradient(135deg, #86efac, #a7f3d0);
+  color: #090e0c;
+  box-shadow: 0 4px 15px rgba(134, 239, 172, 0.2);
+}
+
+.cute-btn-primary:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(134, 239, 172, 0.4);
+}
+
+.cute-btn-secondary {
+  background: rgba(134, 239, 172, 0.08);
+  color: var(--accent-sage);
+}
+
+.cute-btn-secondary:hover {
+  background: rgba(134, 239, 172, 0.15);
+  transform: translateY(-1px);
+}
+
+.cute-btn-danger {
+  background: rgba(255, 104, 132, 0.1);
+  color: #ff6884;
+}
+
+.cute-btn-danger:hover {
+  background: rgba(255, 104, 132, 0.2);
+  transform: translateY(-1px);
+}
+
+.error-badge {
+  background: rgba(255, 104, 132, 0.08);
+  border: 1px solid rgba(255, 104, 132, 0.3);
+  color: #ff6884;
+  padding: 10px 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
